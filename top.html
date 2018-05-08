@@ -1,0 +1,44 @@
+<template id="logo">
+	<style type="text/css">
+		::content li{
+			display: inline-block;
+			padding: 20px 10px;
+		}
+	</style>
+	<div>helloworld</div>
+</template>
+<script type="text/javascript">
+	 (function() {
+        // Creates an object based in the HTML Element prototype
+        // 基于HTML Element prototype 创建obj
+        var element = Object.create(HTMLElement.prototype);
+        // 获取特mplate的内容
+        var template = document.currentScript.ownerDocument.querySelector('template').content;
+        // element创建完成之后的回调
+        element.createdCallback = function() {
+            // 创建 shadow root
+            var shadowRoot = this.createShadowRoot();
+            // 向root中加入模板
+            var clone = document.importNode(template, true);
+            shadowRoot.appendChild(clone);
+        };
+        document.registerElement('button-hello', {
+            prototype: element
+        });
+    }());
+	// var template = document.currentScript.ownerDocument.querySelector('template').content;
+	// class ButtonHelloElement extends HTMLElement{
+ //        constructor(){
+ //            super()
+ //            this.addEventListener('click', ()=>{
+ //                alert("hello world");
+ //            })
+ //        }
+ //    }
+ //    ButtonHelloElement.createdCallback = function(){
+ //    	var shadowRoot = this.createShadowRoot();
+ //    	var clone = document.importNode(template, true);
+ //    	shadowRoot.appendChild(clone);
+ //    }
+ //    customElements.define('button-hello', ButtonHelloElement,{extends: 'button'});
+</script>
